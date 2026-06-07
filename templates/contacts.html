@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Контакты - Блог{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h1 class="mb-4">Контакты</h1>
+        
+        {% if contacts %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Список контактов из файла:</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for contact in contacts %}
+                    <li class="list-group-item">{{ contact }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if message_sent %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Сообщение успешно отправлено!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Отправить сообщение</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('contacts') }}">
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Ваше сообщение:</label>
+                        <textarea class="form-control" id="message" name="message" rows="4" 
+                                  placeholder="Введите ваше сообщение..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
