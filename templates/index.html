@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Главная - Блог{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1 class="mb-4">Добро пожаловать в мой блог!</h1>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">О проекте</h5>
+                <p class="card-text">
+                    Это пример Flask приложения с использованием Bootstrap для стилизации.
+                    Проект демонстрирует основные возможности веб-разработки.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Особенности</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Использование Bootstrap для верстки</li>
+                    <li class="list-group-item">Работа с контактами через файл</li>
+                    <li class="list-group-item">Обработка ошибок 404 и 500</li>
+                    <li class="list-group-item">Поддержка POST-запросов</li>
+                    <li class="list-group-item">Чтение файлов через контекстный менеджер</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Быстрые ссылки</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('contacts') }}" class="btn btn-outline-primary">Контакты</a>
+                    <button type="button" class="btn btn-outline-secondary" onclick="testPostRequest()">
+                        Тест POST-запроса
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function testPostRequest() {
+    fetch('/post', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ test: 'Тестовые данные' })
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert('POST-запрос отправлен! Проверьте консоль сервера.');
+        console.log('Ответ сервера:', data);
+    });
+}
+</script>
+{% endblock %}
