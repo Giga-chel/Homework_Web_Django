@@ -44,3 +44,14 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('500.html'), 500
 
+
+@app.route('/post', methods=['POST'])
+def post_request():
+    # Сервер принимает POST-запрос, данные выводятся в консоль без ошибок
+    data = request.get_json()
+    print(f"POST-запрос получен: {data}")
+    return 'POST-запрос принят', 200
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
