@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from dotenv import load_dotenv
 from src.config import Config
 from flask_bootstrap import Bootstrap
-
+import os
 
 load_dotenv()
 
@@ -33,3 +33,14 @@ def contacts():
         contacts_list = ["Файл contacts.txt не найден"]
 
     return render_template('contacts.html', contacts=contacts_list)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
+
